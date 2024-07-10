@@ -5,6 +5,8 @@ inputs:
   newsLink:
     description: 'A string in a specific format that contains a link to a article.'
     required: true
+  includeSelector:
+    description: 'CSS selector of elements which should be included'
   ignoreSelector:
     description: 'CSS selector of elements which should be ignored'
   markDownFilePath:
@@ -14,6 +16,16 @@ inputs:
   githubToken:
     description: ' GitHub  write and read token,auto create,no need to set'
     default: ''
+  # This flag is used to skip the check of whether the article has been generated
+  skipSameArticleCheck:
+    description: 'Skip the check of whether the article has been generated'
+    type: 'boolean'
+    default: 'false'
+  # This flag is used to skip the issue comment
+  skipIssueComment:
+    description: 'Skip issue comment'
+    type: 'boolean'
+    default: 'false'
 
 runs:
   using: 'node20'
