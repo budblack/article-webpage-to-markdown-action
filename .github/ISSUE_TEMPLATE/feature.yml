@@ -1,0 +1,28 @@
+name: 'Feature（新特性）'
+about: 'Suggest an idea for this repo.（对本仓库新功能提出建议。）'
+title: ''
+labels:
+  - feature
+assignees: 
+  - TechQuery
+
+body:
+  - type: textarea
+    id: problem-description
+    attributes:
+      label: 'Is your feature request related to a problem? Please describe.（遇见的问题）'
+      placeholder: 'A clear and concise description of what the problem is.（简单地描述问题）'
+      required: true
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: 'Describe the solution you'd like（描述想要的解决方案）'
+      placeholder: 'A clear and concise description of what you want to happen.（简洁地描述你想要的解决方案。）'
+      required: true
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: 'Additional context（其他）'
+      placeholder: 'Add any other context about the problem here.（添加其他你想添加的内容）'

@@ -1,0 +1,55 @@
+name: 'Bug Report（bug 提交）'
+about: 'Report a software bug on this repo.（提交本仓库的 Bug）'
+title: ''
+labels:
+  - bug
+assignees: 
+  - TechQuery
+
+body:
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: 'Describe the bug（bug 描述）'
+      placeholder: 'A clear and concise description of what the bug is.（用简单的语言描述 bug。）'
+      required: true
+
+  - type: textarea
+    id: reproduction-steps
+    attributes:
+      label: 'To Reproduce（复现方式）'
+      placeholder: |
+        Steps to reproduce the behavior（复现 bug 的步骤）:
+        1. Go to '...'（访问“...”）
+        2. Click on '....'（点击“...”）
+        3. See bug（出现 bug）
+        4. ...
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: 'Expected behavior（预期现象）'
+      placeholder: 'A clear and concise description of what you expected to happen.（用简单的语言描述期待看到的现象。）'
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: 'Screenshots（截图）'
+      placeholder: 'If applicable, add screenshots to help explain your problem.（可以截图辅助描述。）'
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: 'environment（环境）'
+      placeholder: |
+        - OS（操作系统）: [e.g. iOS（例如：iOS）]
+        - Node.js’s Version（Node.js 版本）: [e.g. 12.12.12（例如：12.12.12）]
+      required: true
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: 'Additional context（其他）'
+      placeholder: 'Add any other context about the problem here.（添加其他你想添加的内容）'
