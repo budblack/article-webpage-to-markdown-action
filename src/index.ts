@@ -14,7 +14,10 @@ import {
 
 (async () => {
   const newsLink = getInput('newsLink'),
+    includeSelector = getInput('includeSelector'),
     ignoreSelector = getInput('ignoreSelector'),
+    skipIssueComment = getInput('skipIssueComment') === 'true',
+    skipSameArticleCheck = getInput('skipSameArticleCheck') === 'true',
     markDownFilePath = getInput('markDownFilePath') || './';
 
   if (!newsLink) throw new Error(Err_DontGetNewsLink);
@@ -24,9 +27,22 @@ import {
     markDownFilePath,
     path.split('/').filter(Boolean).at(-1) + '.md'
   );
-  if (existsSync(filePath)) throw new URIError(Err_SameNameFile);
+  // When the file already exists, throw an error, unless the skipSameArticleCheck option is set to true.
+  // Because some special cases may need to overwrite the existing file, such as the content of the article has been updated.
+  // OR, just rerun the action to do further processing. Action should not be responsible for this.
+  if (!skipSameArticleCheck && existsSync(filePath))
+    throw new URIError(Err_SameNameFile);
 
   const { document } = await loadPage(path);
+
+  if (includeSelector) {
+    const includeElement = document.querySelectorAll(includeSelector);
+    if (includeElement) {
+      document.body.innerHTML = '';
+      document.body.append(...includeElement);
+    }
+  }
+
   const { meta, content } = HTMLtoMarkdown(document, ignoreSelector);
 
   const articleText = `---
@@ -39,8 +55,8 @@ ${stringify({
 ---
 
 ${content.replace('\n\n', '\n\n<!-- more -->\n\n')}`;
-    setOutput('markdown_file_path', filePath);
-    await outputFile(filePath, articleText);
+
+  await outputFile(filePath, articleText);
 
   const { repo, ref } = context;
   const successMessage = `
@@ -50,7 +66,8 @@ ${content.replace('\n\n', '\n\n<!-- more -->\n\n')}`;
     repo.repo
   }/edit/${join(ref.replace(/^refs\/heads\//, ''), filePath)})`;
 
-  await addComment(successMessage.trim());
+  // Sometimes, the issue comment is not needed, such as further processing will do.
+  if (!skipIssueComment) await addComment(successMessage.trim());
 
   // return  filePath
   setOutput('markdown_file_path', filePath);
