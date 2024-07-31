@@ -39,8 +39,8 @@ ${stringify({
 ---
 
 ${content.replace('\n\n', '\n\n<!-- more -->\n\n')}`;
-
-  await outputFile(filePath, articleText);
+    setOutput('markdown_file_path', filePath);
+    await outputFile(filePath, articleText);
 
   const { repo, ref } = context;
   const successMessage = `
