@@ -49,8 +49,8 @@ import {
 ${stringify({
   ...meta,
   originalURL: path,
-  translator: '',
-  reviewer: ''
+  posteditor: '',
+  proofreader: ''
 }).trim()}
 ---
 
